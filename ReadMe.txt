@@ -1,4 +1,5 @@
 select case 语句----->当多个case语句均满足时，随机执行一个便退出
+switch case 语句----->每条case语句默认加上break，即执行完匹配的case语句后，便会退出switch。可以在每条case语句后面加上fallthrough关键字，强行执行后面的case语句。
 defer  语句的嵌套入桟
 panic 语句的执行，是一个内建函数,可以中断原有的控制流程,进入一个令人恐慌的流程中。当函数 F 调用
 panic ,函数 F 的执行被中断,但是 F 中的延迟函数会正常执行,然后 F 返回到调用它的地方
