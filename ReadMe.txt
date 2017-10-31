@@ -24,6 +24,23 @@ interface变量存储的类型，
 2.这里有一点需要强调的是: valuetype:=element.(type) 语法不能在 switch 外的任何逻辑里面使用,如
 果你要在 switch 外面判断一个类型就使用 comma-ok 。
 
+接口赋值：
+1.将对象实例赋值给接口（一个结构实现了接口的所有方法，可实例化一个对象，直接赋值给接口）
+type A interface{} 方法多
+type B interface{} 方法少
+type C struct{} 实现了A，B的接口
+c=new（C）
+var a A 
+a=c
+
+2.将一个接口赋值给另一个接口（方法多的接口，可直接赋值给方法少的接口）
+type A interface{}方法多
+type B interface{}方法少
+var a  A
+var b  B
+b=a
+
+
 反射：
 
 
