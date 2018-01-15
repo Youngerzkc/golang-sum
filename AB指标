@@ -27,3 +27,33 @@ redis 学习总结：key-value 数据库(BSD)
 3.支持数据的备份，即master-slave模式的数据备份
 4.单个操作是原子性的。多个操作也支持事务，即原子性，通过MULTI和EXEC指令包起来。
 
+检查redis服务器系统进程
+kaichangzhu@bogon:~$ ps -aux|grep redis
+检查Redis服务器状态
+kaichangzhu@bogon:~$ netstat -nlt|grep 6379
+
+sudo /etc/init.d/redis-server status
+
+通过命令行客户端访问Redis
+在本机输入redis-cli命令就可以启动，客户端程序访问Redis服务器。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
