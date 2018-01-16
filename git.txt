@@ -1,0 +1,18 @@
+
+git config -l --->查看git配置
+
+git remote set-url origin https://github.com/Youngerzkc/golang-sum.git
+git remote add upstream git远程仓库 ----》添加远程仓库源
+
+git fecth upstream 上面命令将某个远程主机的更新，全部取回本地。默认情况下，git fetch取回所有分支的更新。 
+git push origin master 上传更新
+
+
+问题解决:
+git push （reject）这个拒绝推送错误【rejected】,经过看错误提示，是因为远程仓库中有一些文件在本地仓库中不存在，所以必须首先将远程仓库pull一份到本地：
+git pull origin master
+git push -u origin master
+
+误删除本地文件(版本回退)
+git reset --hard [commit Id]
+[commit Id]-->git log 可查看
