@@ -1,0 +1,8 @@
+json web Token--在web应用间安全的传递信息
+jwt组成（字符串三部分）头部、载荷和签名
+头部(Header)用于描述该JWT的最基本的信息;如类型，签名用的算法
+{
+	"typ":"JWT"
+	"alg":"HS256"
+}
+对此进行Base64编码，之后的字符串就成了JWT的Header(头部)。
