@@ -65,6 +65,7 @@ Redis 管道技术可以在服务端未响应时，客户端可以继续向服�
 查看 redis 管道，只需要启动 redis 实例并输入以下命令：
 $(echo -en "PING\r\n SET runoobkey redis\r\nGET runoobkey\r\nINCR visitor\r\nINCR visitor\r\nINCR visitor\r\n"; sleep 10) | nc localhost 6379
 
+master/slave(主写从读)
 
 
 
