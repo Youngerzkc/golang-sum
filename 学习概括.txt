@@ -70,7 +70,11 @@ insert into categories set id=2, name="招聘",sequence=0,parent_id=0,created_at
 
 ngrok 本机的端口映射到公网地址
 
+中间件的用处？
 
+
+单例模式？？？连接池
+（双端检索）
 
 
 
