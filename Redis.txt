@@ -67,6 +67,115 @@ $(echo -en "PING\r\n SET runoobkey redis\r\nGET runoobkey\r\nINCR visitor\r\nINC
 
 master/slave(主写从读)
 
+redis --->单进程 c 
+默认16个数据库(默认下标0---15)(selcet 下标切换数据库)（select 0）
+DBSIZE 查看数据库的key的数量
+FLUSHDB 清除当前库
+FLUSHALL 清楚所有库
+
+redis五大数据类型{
+1.String(字符串)
+2.Hash(哈希(类似map))
+3.Lish(列表)（双向的，前后都可以加）
+4.Set(集合)(无序，无重复)
+5.Zset(有序集合)(会关联一个double类型的分数)(游戏中分数)
+
+strings类型是二进制安全的，意思是redis的string可以包含任意数据。
+
+http://redisdoc.com/命令组合 
+1+5(key + value)
+
+key{
+1.keys *
+2.exists key
+3.expire key 秒:给定的key设置过期时间
+4.ttl key 查看还有多少秒过期，-1表示永不过期，-2已过期(过期自动移除，不存在了)
+5.type key 查看key是什么类型
+}
+
+
+字符串string{
+1.set/get/del/append/strlen
+ 
+append +key +字符串
+strlen +key value值的长度
+
+2.Incr/decr/incrby/decrby 一定要是数字才能进行加减
+Incr key -->加 1
+incrby +key +增量
+
+3.getrange/setrange
+getrange：获取指定区间范围内的值(从零到负一表示全部)
+set key5 abcd1234
+getrange key5 0 -1
+getrange key5 0 2 (abc)
+
+setrange：设置指定区间范围的值，格式 setrange key值 具体值
+
+setrange key5 1 xxx
+get key5(axxx1234)
+
+4.setex(set with expire)+键秒+值/setnx(set if not exist)
+setex key5 10 abcd1234
+
+setnx k1 v11 
+
+5.mset/mget/msetnx(m-->more(多个))
+mset k1 v1 k2 v2
+mget k1 k2 
+msetnx k4 v4 k5 v5（前提k4,k5均不存在才能成功）
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
