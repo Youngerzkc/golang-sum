@@ -1,0 +1,131 @@
+
+学习三大主线
+
+nginx是什么？
+nginx能干嘛？
+nginx怎么玩？
+
+nginx是一个高性能的web服务器(专门提供网页或者网站的服务)，是一个高性能的http和反向
+代理服物器，也是（imap）一个代理服务器（俄罗斯）
+分为四大篇：基础、应用、优化
+基础篇
+1.安装、编译，控制使用
+基本用法：
+nginx基本构架 master(主进程)和work(进程)
+信号控制（官网查看最全的）
+kill -INT pid(用法)
+TERM ，INT quick shutdown
+QUIT 优雅的关闭进程，即等请求结束后在关闭
+HUB 改变配置文件，平滑的重读配置文件
+USR1 重读日志文件，在日志分割时有用
+USR2 平滑的升级
+
+配置段
+//全局区
+worker_processes 1;一个工作的子进程，可以进行修改，但是
+太大无益，一般设置为CPU数×核数
+
+events {
+    //一般是配置nginx的连接特性
+    //如一个work能同时允许多少连接
+    worker_connections 768;//这是一个子进程最大允许连接7658个连接       # multi_accept on;
+}
+http {
+    //基于域名的虚拟主机配置
+    server{
+      listen 80;
+      server_name z.com;
+      location /{ //定位，把特殊的路径或文件再次定位，如image目录须单独处理
+                  //如php单独处理
+          root z.com;(相对nginx路径)
+          index index.html;
+      }
+    }
+    //基于端口的虚拟主机的配置
+    server{
+        listen 2022;
+        server_name z.com;
+        location /{
+            root /var/www/html;（路径）
+            index index.html;
+        }
+    }
+    //基于ip的虚拟主机配置
+    server{
+        listen 80;
+        server_name 192.168.0.100;
+        location /{
+            root html/ip;//（路径）
+            index index.html;
+        }
+    }
+}
+
+日志管理(运维)
+
+nginx的server段可以看到如下类似信息
+#access_log logs/host.access_log main;
+这说明该server，他的访问日志文件 logs/host.access_log，
+使用的格式main格式;
+main格式是什么?  log_format main .....
+main格式是我们定义好的一种日志的格式，并起个名字，便于引用以上的
+远程ip 远程用户/用户时间 请求方法 请求body长度  referer(来源信息,在哪里找的)
+http-url-agent 用户代理/蜘蛛(爬虫了)，被转发的请求的原始IP
+http_x_forwarded_for 在经过代理时所转发的ip
+
+nginx可以针对不同的server做不同的log(有的web服务器不支持)
+
+date -s "2018-01-30 18:00:00
+date -d yesterday
+date -d yesterday +%Y%m%d (格式化时间)
+日志处理
+
+日志切割：（以昨天的日志为单独一个文件）
+{
+#!/bin/sh
+LOGPATH=/etc/nginx/logs/z.com.access.log
+BASEPATH=/var/log/$(date -d yesterday +%Y%m )
+mkdir -p $BASEPATH
+bak=$BASEPATH/$(date -d yesterday +%Y%m%d%H%M).z.como.access.log
+#echo $bak
+#mkdir $BASEPATH/$(date -d yesterday +%Y%m) 
+mv $LOGPATH $bak
+touch $LOGPATH
+kill -USR1 `cat /run/nginx.pid ` #发信号
+
+}
+linux 下做定时任务
+crontab -e
+中杠（-）：可以用整数之间的中杠表示一个整数范围，例如“2-6”表示“2,3,4,5,6”
+正斜线（/）：可以用正斜线指定时间的间隔频率，例如“0-23/2”表示每两小时执行一次。
+同时正斜线可以和星号一起使用，例如*/10，如果用在minute字段，表示每十分钟执行一次 
+ 分 时 日 月 周 命令
+×/1 × × × × 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
