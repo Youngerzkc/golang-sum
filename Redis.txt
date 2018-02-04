@@ -26,7 +26,7 @@ redis 127.0.0.1:6379> SAVE 该命令将在redis安装目录中创建dump.rdb文�
 redis 127.0.0.1:6379> CONFIG GET dir
 1) "dir"
 2) "/usr/local/redis/bin"
-以上命令 CONFIG GET dir 输出的 redis 安装目录为 /usr/local/redis/bin.
+以上命令 CONFIG GET dir 输出的 redis 安装目录为 /usr/local/redis/bin
  
 Bgsave
 创建 redis 备份文件也可以使用命令 BGSAVE，该命令在后台执行
@@ -127,6 +127,19 @@ msetnx k4 v4 k5 v5（前提k4,k5均不存在才能成功）
 
 }
 
+持久化？什么是？（rdb，aof）[面试亮点]（两者可以共存）
+RDB -->redis databases;
+AOF -->append only file;文件（被破坏则redis不能起来）
+
+在指定的时间间隔内将内存中的数据快照写入磁盘，
+也就是行话讲的Snapshot快照，它恢复时将快照文件直接读到内存中。
+Redis会单独创建(fork)一个子进程来进行持久化，会先将数据写入一个临时文件中。
+
+AOF 是什么？以日志的形式来记录每个写操作，将redis执行的所有的写指令记录下来
+（读操作不记录）
+RDB和AOF可以共存，AOF优先。AOF被破坏则redis无法启动，但是AOF文件可以修复，
+redis-check-aof --fix appendonly.aof（修复）
+ AOF配置策略？
 
 
 
