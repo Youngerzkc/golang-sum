@@ -1,0 +1,4 @@
+1.websocket 是什么？
+2.websocket 能干什么?
+3.websocket 怎么玩？
+websocket是HTML5开始提供的一种在单个TCP连接上进行全双工通讯的协议。允许服务器主动发送给客户端。
