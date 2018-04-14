@@ -161,7 +161,12 @@ nginx响应请求{
              1.最大连接数 somaxconn ---->/proc/sys/net/core/somaxconn 50000 修改较大为好(注意proc文件的理解)
              2.是否加快tcp连接的回收，recycle ---->/proc/sys/net/ipv4/tcp_tw_recycle 修改为1
              3.空的tcp是否允许回收利用。------>/proc/sys/net/ipv4/tcp_tw_reuse 修改为1
-             5.洪水攻击--->不做洪水抵御 ----》 /proc/sys/net/ipv4/tcp_syncookies 修改为0
+             4.洪水攻击--->不做洪水抵御 ----》 /proc/sys/net/ipv4/tcp_syncookies 修改为0
+            脚本：
+            echo 50000 > /proc/sys/net/core/somaxconn
+            echo 1 > /proc/sys/net/ipv4/tcp_tw_recycle
+            echo 1 > /proc/sys/net/ipv4/tcp_tw_reuse
+            echo 0 > /proc/sys/net/ipv4/tcp_syncookies
          }
          2.nginx {
              1.每个子进程允许打开的连接(worker_connections)
@@ -191,7 +196,6 @@ keep-alive {
     http 1.0 client 和server 请求->应答 断开
     http 1.1 添加keep-alive 防止频繁建立连接，但是在高并发网站中慎用，tcp回收很重要
 }
-
 
 
 现阶段遇到的问题？
